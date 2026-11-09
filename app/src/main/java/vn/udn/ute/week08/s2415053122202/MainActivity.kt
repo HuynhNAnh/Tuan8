@@ -26,7 +26,23 @@ class MainActivity : AppCompatActivity() {
                 binding.tvKetQua.text = "Điểm T: %.2f\n Kết quả: %s".format(t,xepLoai)
             }
         }
+        binding.btnXoa.setOnClickListener {
+            binding.edtTenHP.text?.clear()
+            binding.edtQT.text?.clear()
+            binding.edtCK.text?.clear()
+        }
+        binding.btnLamSach.setOnClickListener {
+            binding.edtTenHP.text?.clear()
+            binding.edtQT.text?.clear()
+            binding.edtCK.text?.clear()
+
+            binding.edtTenHP.error = null
+            binding.edtQT.error = null
+            binding.edtCK.error = null
+            binding.tvKetQua.text = ""
+        }
     }
+
     private fun kiemTraDuLieu(): Boolean{
         val ten = binding.edtTenHP.text.toString().trim()
         val qt = binding.edtQT.text.toString().toDoubleOrNull()
