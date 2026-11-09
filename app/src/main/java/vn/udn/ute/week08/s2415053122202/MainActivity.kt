@@ -3,6 +3,7 @@ package vn.udn.ute.week08.s2415053122202
 import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
 import android.widget.Toast
+import androidx.core.widget.doAfterTextChanged
 import vn.udn.ute.week08.s2415053122202.databinding.ActivityMainBinding
 
 class MainActivity : AppCompatActivity() {
@@ -11,13 +12,25 @@ class MainActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         binding = ActivityMainBinding.inflate(layoutInflater)
         setContentView(binding.root)
-
+        binding.edtTenHP.doAfterTextChanged {
+            binding.edtTenHP.error = null
+            binding.tvKetQua.text = ""
+        }
+        binding.edtQT.doAfterTextChanged {
+            binding.edtQT.error = null
+            binding.tvKetQua.text = ""
+        }
+        binding.edtCK.doAfterTextChanged {
+            binding.edtCK.error = null
+            binding.tvKetQua.text = ""
+        }
         binding.btnKiemTra.setOnClickListener {
             if(kiemTraDuLieu()){
                 Toast.makeText(this,"Dữ liệu hợp lệ", Toast.LENGTH_SHORT).show()
             }
         }
         binding.btnKetQua.setOnClickListener {
+            binding.tvKetQua.text = ""
             if(kiemTraDuLieu()){
                 val qt = binding.edtQT.text.toString().toDouble()
                 val ck = binding.edtCK.text.toString().toDouble()
@@ -52,7 +65,7 @@ class MainActivity : AppCompatActivity() {
         binding.edtCK.error = null
         var hopLe = true
         if(ten.isEmpty()){
-            binding.edtTenHP.error = "Vui lòng nhập tên học phần"
+            binding.edtTenHP.error = "Không được để trống"
             hopLe = false
         }
         if (qt == null || qt !in 0.0..10.0){
@@ -60,7 +73,7 @@ class MainActivity : AppCompatActivity() {
             hopLe = false
         }
         if (ck == null || ck !in 0.0..10.0){
-            binding.edtCK.error = "Điểm quá trình phải từ 0 đến 10"
+            binding.edtCK.error = "Điểm cuối kỳ phải từ 0 đến 10"
             hopLe = false
         }
         return hopLe
