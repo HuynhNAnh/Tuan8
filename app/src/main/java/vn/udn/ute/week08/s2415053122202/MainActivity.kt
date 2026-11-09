@@ -82,8 +82,13 @@ class MainActivity : AppCompatActivity() {
         return 0.4 * qt + 0.6 * ck
     }
     private fun phanLoai(t: Double,ck: Double): String {
-        return if(t >=5.0 && ck >= 3.0){
-            "Đạt"
-        }else{ "Chưa đạt"}
+        return if(t < 5.0 || ck < 3.0 ){
+            "Chưa đạt"
+        }else{
+            if(t >= 9) {
+                "Đạt tốt"
+            }else{"Đạt"}
+        }
+
     }
 }
