@@ -14,7 +14,16 @@ class MainActivity : AppCompatActivity() {
 
         binding.btnKiemTra.setOnClickListener {
             if(kiemTraDuLieu()){
-
+                Toast.makeText(this,"Dữ liệu hợp lệ", Toast.LENGTH_SHORT).show()
+            }
+        }
+        binding.btnKetQua.setOnClickListener {
+            if(kiemTraDuLieu()){
+                val qt = binding.edtQT.text.toString().toDouble()
+                val ck = binding.edtCK.text.toString().toDouble()
+                val t = tinhDiem(qt,ck)
+                val xepLoai = phanLoai(t,ck)
+                binding.tvKetQua.text = "Điểm T: %.2f\n Kết quả: %s".format(t,xepLoai)
             }
         }
     }
@@ -40,5 +49,12 @@ class MainActivity : AppCompatActivity() {
         }
         return hopLe
     }
-
+    private fun tinhDiem(qt: Double, ck: Double): Double{
+        return 0.4 * qt + 0.6 * ck
+    }
+    private fun phanLoai(t: Double,ck: Double): String {
+        return if(t >=5.0 && ck >= 3.0){
+            "Đạt"
+        }else{ "Chưa đạt"}
+    }
 }
